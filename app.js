@@ -79,13 +79,15 @@ const Post = mongoose.model("Post", postsSchema);
 
 app.get("/", (req, res) => {
 
-  res.render("index", {});
+  res.render("index");
 });
 
 app.get("/sign_up", (req, res) => {
-  // After successful registration the app should redirect to dashboard
+  res.render("sign_up");
+});
 
-  res.render("sign_up", {});
+app.get("/login", (req, res) => {
+  res.render("login");
 });
 
 app.get("/auth/google",
@@ -99,21 +101,15 @@ function(req, res) {
   res.redirect("/dashboard");
 });
 
-app.get("/login", (req, res) => {
-  // After successful login the app should redirect to dashboard
-
-  res.render("login", {});
-});
-
 app.get("/dashboard", (req, res) => {
   // If the user is not logged in the page should redirect to login
+  // This page should show all the posts the user created
 
   res.render("dashboard", {});
 });
 
 app.get("/privacy_policy", (req, res) => {
-
-  res.render("privacy_policy", {});
+  res.render("privacy_policy");
 });
 
 app.get("/create_post", (req, res) => {
@@ -138,6 +134,41 @@ app.get("/view_posts", (req, res) => {
   // If the user is not logged in the page should redirect to login
 
   res.render("view_posts", {});
+});
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+app.post("/sign_up", (req, res) => {
+  User.register({username: req.body.username}, req.body.password, (err, user) => {
+    if (err) {
+      console.log(err);
+      res.redirect("/sign_up");
+    } else {
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/dashboard");
+      });
+    }
+  });
+});
+
+app.post("/login", (req, res) => {
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password
+  });
+
+  req.login(user, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/dashboard");
+      });
+    }
+  });
 });
 
 // -- Port info

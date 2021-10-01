@@ -1,12 +1,27 @@
 <%- include("partials/default_header") -%>
 
-<h1 class="desktop-h1 mobile-small-h1 mobile-large-h1">Basic Blog Login Page</h1>
-<div class="container">
-  <div class="col-sm-4">
-    <div class="card social-block">
-      <div class="card-body">
-        <a class="btn btn-block" href="/auth/google" role="button"><i class="bi bi-google"></i> Sign Up With Google</a>
-      </div>
+<div class="row login-signup-row">
+  <h1 class="login-signup-title">Basic Blog</h1>
+  <h2 class="login-signup-subtitle">Sign Up</h2>
+  <div class="col">
+    <a class="btn btn-block btn-primary login-signup-google" href="/auth/google" role="button"><i class="bi bi-google"></i>&nbsp;&nbsp;Sign Up With Google</a>
+  </div>
+  <div class="col">
+    <h1 class="login-signup-divider">OR</h1>
+  </div>
+  <div class="col">
+    <div class="form-signin">
+      <form action="/sign_up" method="POST">
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" placeholder="email@example.com" name="username">
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+      </form>
     </div>
   </div>
 </div>
