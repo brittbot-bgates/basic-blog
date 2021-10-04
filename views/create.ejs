@@ -1,0 +1,16 @@
+<%- include("partials/default_header") -%>
+
+<div class="create-div">
+  <h1 class="desktop-h1 mobile-small-h1 mobile-large-h1">Create Post</h1>
+  <form class="create-form" action="/create" method="post">
+    <div class="form-group">
+      <label for="postTitle">Post Title</label>
+      <input class="form-control post-title" type="text" name="postTitle">
+      <label for="postContent">Post Content</label>
+      <textarea class="form-control post-content" name="postContent" rows="5" cols="50"></textarea>
+    </div>
+    <button class="btn btn-primary btn-lg" type="submit" name="button">Publish</button>
+  </form>
+</div>
+
+<%- include("partials/footer") -%>

@@ -1,19 +1,35 @@
-<%- include("partials/default_header") -%>
+<%- include("partials/index_header") -%>
 
-<div class="px-4 pt-5 my-5 text-center border-bottom">
-    <h1 class="display-4 fw-bold">Basic Blog</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">A blog which allows you to create, edit, and delete blog posts. You can also share them via various social media platforms.</p>
-      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-        <a href="/sign_up" class="btn btn-primary btn-lg px-4 me-sm-3">Sign Up</a>
-        <a href="/login" class="btn btn-outline-secondary btn-lg px-4">Login</a>
-      </div>
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-lg-5 py-5">
+    <div class="col-lg-7 text-center text-lg-start">
+      <h1 class="display-4 fw-bold lh-1 mb-3">Basic Blog</h1>
+      <p class="col-lg-10 fs-4">A website that allows you to sign up to create and view your blog posts.</p>
+      <img class="blog-hero" src="/img/blog_hero.jpg" alt="Basic Blog Hero Image">
     </div>
-    <div class="overflow-hidden" style="max-height: 60vh;">
-      <div class="container px-5">
-        <img src="/img/blog_hero.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Basic Blog" width="700" height="500" loading="lazy">
+    <div class="col-md-10 mx-auto col-lg-5">
+      <div class="login">
+        <a class="btn btn-lg btn-secondary login-button" href="/login" role="button">Login</a>
+      </div>
+      <hr class="my-4">
+      <form class="p-4 p-md-5 border rounded-3 bg-light" action="/sign_up" method="post">
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+        <hr class="my-4">
+        <small class="text-muted">By clicking Sign up, you agree to the <a href="/terms">terms of use.</a></small>
+      </form>
+      <div class="google-signup">
+        <a class="btn btn-lg btn-primary google-signup-button" href="/auth/google" role="button"><i class="bi bi-google"></i>&nbsp;&nbsp;Sign Up With Google</a>
       </div>
     </div>
   </div>
+</div>
 
-<%- include("partials/default_footer") -%>
+<%- include("partials/footer") -%>
