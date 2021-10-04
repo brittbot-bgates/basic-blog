@@ -1,46 +1,97 @@
 /* Sitewide */
+
 body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* login, signup */
+a {
+  color: #4169E1;
+}
 
-.login-signup-row {
-  margin-top: 50px;
+a:hover {
+  color: #008080;
+}
+
+.desktop-social-media {
+  background-color: #f5f5f5;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  padding: 6px;
+  font-size: 18px;
   text-align: center;
 }
 
-.login-signup-title, .login-signup-subtitle {
+/* create.ejs */
+.create-div {
+  margin-top: 50px;
+  width: 75%;
+}
+
+.create-form {
+  margin-top: 20px;
+}
+
+.post-title {
+  margin-bottom: 20px;
+}
+
+.post-content {
+  margin-bottom: 20px;
+}
+
+/* dashboard.ejs */
+.bi {
+  vertical-align: -2px;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 65px;
+  margin-bottom: 16px;
+  font-size: 32px;
+  color: #fff;
+  border-radius: 12px;
+}
+
+/* index.ejs */
+.blog-hero {
+  width: 90%;
+  border-radius: 2px;
+}
+
+.login {
   text-align: center;
 }
 
-.login-signup-subtitle {
-  margin-bottom: 50px;
+.login-button {
+  display: inline-block;
 }
 
-.login-signup-google {
-  margin-top: 50px;
+.google-signup {
+  margin: 20px 0;
 }
 
-.login-signup-divider {
-  font-weight: bold;
-  margin: 0;
-  position: absolute;
-  top: 30%;
-  left: 48%;
-  margin-right: -50%;
-  transform: translate(-505, -50%);
+.google-signup-button {
+  display: block;
+}
+
+/* login.ejs */
+.login {
+  align-items: center;
+  margin-top: 100px;
 }
 
 .form-signin {
   width: 100%;
-  max-width: 330px;
+  max-width: 350px;
   padding: 15px;
   margin: auto;
-}
-
-.form-signin .checkbox {
-  font-weight: 400;
 }
 
 .form-signin .form-floating:focus-within {
@@ -57,4 +108,18 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.login-img {
+  width: 75%;
+}
+
+/* privacy_policy.ejs */
+.privacy-policy {
+  margin: 50px 0;
+}
+
+/* terms.ejs */
+.terms-of-service {
+  margin: 50px 0;
 }

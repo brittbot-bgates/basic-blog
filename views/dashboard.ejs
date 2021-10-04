@@ -1,5 +1,43 @@
-<%- include("partials/logged_in_header") -%>
+<%- include("partials/dashboard_header") -%>
 
-<h1 class="desktop-h1 mobile-small-h1 mobile-large-h1">Basic Blog User Dashboard</h1>
+<div class="container px-2 py-5">
+  <h2 class="pb-2 border-bottom">What Would You Like To Do?</h2>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="feature col">
+      <div class="feature-icon bg-primary bg-gradient">
+        <i class="bi bi-hammer"></i>
+      </div>
+      <h2>Create A New Post</h2>
+      <p>Create a post using our basic features.</p>
+      <a href="/create" class="btn btn-lg btn-secondary">Create Post</a>
+    </div>
+    <div class="feature col">
+      <div class="feature-icon bg-primary bg-gradient">
+        <i class="bi bi-eye"></i>
+      </div>
+      <h2>View Your Posts</h2>
+      <p>View your previous posts using our basic features.</p>
+      <a href="/posts" class="btn btn-lg btn-secondary">View Posts</a>
+    </div>
+    <div class="feature col">
+      <div class="feature-icon bg-primary bg-gradient">
+        <i class="bi bi-pencil"></i>
+      </div>
+      <h2>Edit A Post</h2>
+      <p>Coming soon.</p>
+      <a href="#" class="btn btn-lg btn-secondary disabled" aria-disabled="true">Edit Post</a>
+    </div>
+  </div>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="feature col">
+      <div class="feature-icon bg-primary bg-gradient">
+        <i class="bi bi-trash"></i>
+      </div>
+      <h2>Delete A Post</h2>
+      <p>Coming soon.</p>
+      <a href="#" class="btn btn-lg btn-secondary disabled" aria-disabled="true">Delete Post</a>
+    </div>
+  </div>
+</div>
 
-<%- include("partials/logged_in_footer") -%>
+<%- include("partials/dashboard_footer") -%>

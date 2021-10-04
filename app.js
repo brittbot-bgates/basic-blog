@@ -2,15 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const _ = require("lodash");
 const mongoose = require("mongoose");
-const encrypt = require("mongoose-encryption");
 const passport = require("passport");
 const session = require('express-session');
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-
 const app = express();
 const port = 3000;
 
@@ -22,7 +19,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -67,7 +63,6 @@ function(accessToken, refreshToken, profile, cb) {
 ));
 
 // -- For blog posts
-
 const postsSchema = new mongoose.Schema({
   title: String,
   content: String
@@ -76,18 +71,8 @@ const postsSchema = new mongoose.Schema({
 const Post = mongoose.model("Post", postsSchema);
 
 // -- Routing info
-
 app.get("/", (req, res) => {
-
   res.render("index");
-});
-
-app.get("/sign_up", (req, res) => {
-  res.render("sign_up");
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
 });
 
 app.get("/auth/google",
@@ -97,61 +82,34 @@ passport.authenticate("google", { scope: ["profile"] })
 app.get("/auth/google/dashboard",
 passport.authenticate("google", { failureRedirect: "/login" }),
 function(req, res) {
-  // Successful authentication, redirect to dashboard.
+  // After successful authentication redirect to dashboard.
   res.redirect("/dashboard");
 });
 
-app.get("/dashboard", (req, res) => {
-  // If the user is not logged in the page should redirect to login
-  // This page should show all the posts the user created
-
-  res.render("dashboard", {});
+app.get("/create", (req, res) => {
+  // TODO: Add code to redirect user to login page if user is not logged in
+  res.render("create", {});
 });
 
-app.get("/privacy_policy", (req, res) => {
-  res.render("privacy_policy");
-});
+app.post("/create", (req, res) => {
+  const post = new Post ({
+    title: req.body.postTitle,
+    content: req.body.postContent
+  });
 
-app.get("/create_post", (req, res) => {
-  // If the user is not logged in the page should redirect to login
-
-  res.render("create_post", {});
-});
-
-app.get("/delete_post", (req, res) => {
-  // If the user is not logged in the page should redirect to login
-
-  res.render("delete_post", {});
-});
-
-app.get("/edit_post", (req, res) => {
-  // If the user is not logged in the page should redirect to login
-
-  res.render("edit_post", {});
-});
-
-app.get("/view_posts", (req, res) => {
-  // If the user is not logged in the page should redirect to login
-
-  res.render("view_posts", {});
-});
-
-app.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
-
-app.post("/sign_up", (req, res) => {
-  User.register({username: req.body.username}, req.body.password, (err, user) => {
-    if (err) {
-      console.log(err);
-      res.redirect("/sign_up");
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/dashboard");
-      });
+  post.save(function(err){
+    if(!err){
+      res.redirect("/dashboard");
     }
   });
+});
+
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard");
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
 });
 
 app.post("/login", (req, res) => {
@@ -171,8 +129,59 @@ app.post("/login", (req, res) => {
   });
 });
 
-// -- Port info
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
 
+app.get("/posts", (req, res) => {
+  // TODO: Add code to redirect user to login page if user is not logged in
+
+  Post.find({}, function(err, posts){
+    res.render("view_posts", {
+      posts: posts
+    });
+  });
+});
+
+app.get("/view_posts/:postId", function(req, res){
+  // TODO: Add code to redirect user to login page if user is not logged in
+
+  const requestedPostTitle = req.params.postTitle;
+  Post.findOne({title: requestedPostTitle}, function(err, post){
+    res.render("view_posts", {
+      title: post.title,
+      content: post.content
+    });
+  });
+});
+
+app.get("/privacy_policy", (req, res) => {
+  res.render("privacy_policy");
+});
+
+app.get("/sign_up", (req, res) => {
+  res.render("sign_up");
+});
+
+app.post("/sign_up", (req, res) => {
+  User.register({username: req.body.username}, req.body.password, (err, user) => {
+    if (err) {
+      console.log(err);
+      res.redirect("/");
+    } else {
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/dashboard");
+      });
+    }
+  });
+});
+
+app.get("/terms", (req, res) => {
+  res.render("terms");
+});
+
+// -- Port info
 app.listen(port, () => {
   console.log("App listening at http://localhost:" + port);
 });

@@ -1,29 +1,21 @@
-<%- include("partials/default_header") -%>
+<%- include("partials/login_header") -%>
 
-<div class="row login-signup-row">
-  <h1 class="login-signup-title">Basic Blog</h1>
-  <h2 class="login-signup-subtitle">Login</h2>
-  <div class="col">
-    <a class="btn btn-block btn-primary login-signup-google" href="/auth/google" role="button"><i class="bi bi-google"></i>&nbsp;&nbsp;Login With Google</a>
-  </div>
-  <div class="col">
-    <h1 class="login-signup-divider">OR</h1>
-  </div>
-  <div class="col">
-    <div class="form-signin">
-      <form action="/login" method="POST">
-        <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" placeholder="email@example.com" name="username">
-          <label for="floatingInput">Email address</label>
-        </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password">
-          <label for="floatingPassword">Password</label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-      </form>
+<div class="login">
+  <form class="form-signin" action="/login" method="post">
+    <img class="mb-4 login-img" src="/img/blog_hero.jpg" alt="Basic Blog Hero Image">
+    <h1 class="h3 mb-3 fw-normal">Basic Blog Login</h1>
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+      <label for="floatingInput">Email address</label>
     </div>
-  </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+      <label for="floatingPassword">Password</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <hr class="my-4">
+    <a class="btn btn-lg btn-secondary google-signup-button" href="/auth/google" role="button"><i class="bi bi-google"></i>&nbsp;&nbsp;Login With Google</a>
+  </form>
 </div>
 
-<%- include("partials/default_footer") -%>
+<%- include("partials/footer") -%>
